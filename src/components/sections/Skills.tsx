@@ -6,10 +6,10 @@ import { Badge } from '@/components/ui/Badge'
 import { Sparkles, Code, Calculator, Star } from 'lucide-react'
 import type { Skill } from '@/types'
 
-const levelColor: Record<string, 'success' | 'warning' | 'rose'> = {
+const levelColor: Record<string, 'success' | 'warning' | 'default'> = {
   Advanced:     'success',
   Intermediate: 'warning',
-  Beginner:     'rose',
+  Beginner:     'default', // Kita ganti 'rose' jadi 'default' karena Badge mengenali 'default'
 }
 
 const levelBar: Record<string, string> = {
@@ -69,7 +69,7 @@ export function Skills({ skills }: { skills: Skill[] }) {
                         <Star className="w-3.5 h-3.5 text-rose-400 fill-rose-100" />
                         {skill.name}
                       </span>
-                      <Badge variant={levelColor[skill.level] || 'rose'} size="sm" className="shadow-sm border border-rose-100/50">
+                     <Badge variant={levelColor[skill.level] || 'default'} size="sm" className="shadow-sm border border-rose-100/50 text-rose-600 bg-rose-50">
                         {skill.level}
                       </Badge>
                     </div>

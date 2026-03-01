@@ -38,7 +38,7 @@ export function PortfolioManager({ initialData }: { initialData: Portfolio[] }) 
   const { toasts, toast, removeToast } = useToast()
 
   const { register, handleSubmit, reset, setValue, watch, formState: { errors, isSubmitting } } =
-    useForm<FormData>({ resolver: zodResolver(schema) })
+    useForm<FormData>({ resolver: zodResolver(schema) as any})
 
   const imageUrl = watch('image_url')
 
@@ -49,8 +49,8 @@ export function PortfolioManager({ initialData }: { initialData: Portfolio[] }) 
   }
 
   const openEdit = (item: Portfolio) => {
-    reset(item)
-    setEditing(item)
+    reset(item as any)
+    setEditing(item as any)
     setModal(true)
   }
 

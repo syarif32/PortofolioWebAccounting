@@ -38,7 +38,7 @@ export function ExperienceManager({ initialData }: { initialData: Experience[] }
   const { toasts, toast, removeToast } = useToast()
 
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } =
-    useForm<FormData>({ resolver: zodResolver(schema) })
+    useForm<FormData>({ resolver: zodResolver(schema) as any})
 
   const openAdd = () => {
     reset({ type: 'Internship', year_start: new Date().getFullYear(), sort_order: 0 })
@@ -47,8 +47,8 @@ export function ExperienceManager({ initialData }: { initialData: Experience[] }
   }
 
   const openEdit = (item: Experience) => {
-    reset(item)
-    setEditing(item)
+    reset(item as any)
+    setEditing(item as any)
     setModal(true)
   }
 

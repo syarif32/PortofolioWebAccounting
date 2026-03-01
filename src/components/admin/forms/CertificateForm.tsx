@@ -36,7 +36,7 @@ export function CertificatesManager({ initialData }: { initialData: Certificate[
   const { toasts, toast, removeToast } = useToast()
 
   const { register, handleSubmit, reset, setValue, watch, formState: { errors, isSubmitting } } =
-    useForm<FormData>({ resolver: zodResolver(schema) })
+    useForm<FormData>({ resolver: zodResolver(schema) as any })
 
   const imageUrl = watch('image_url')
 
@@ -47,8 +47,8 @@ export function CertificatesManager({ initialData }: { initialData: Certificate[
   }
 
   const openEdit = (item: Certificate) => {
-    reset(item)
-    setEditing(item)
+    reset(item as any)
+    setEditing(item as any)
     setModal(true)
   }
 

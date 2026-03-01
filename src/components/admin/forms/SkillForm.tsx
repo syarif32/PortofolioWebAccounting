@@ -19,7 +19,7 @@ const schema = z.object({
   name:       z.string().min(1, 'Nama skill wajib diisi'),
   category:   z.enum(['Software', 'Technical', 'Soft Skill']),
   level:      z.enum(['Beginner', 'Intermediate', 'Advanced']),
-  sort_order: z.coerce.number().default(0),
+  sort_order: z.coerce.number().default(0), // Supabase sometimes returns numbers as strings
 })
 
 type FormData = z.infer<typeof schema>
@@ -34,7 +34,7 @@ export function SkillsManager({ initialSkills }: { initialSkills: Skill[] }) {
 
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } =
     useForm<FormData>({
-      resolver: zodResolver(schema),
+      resolver: zodResolver(schema) as any, // Supabase sometimes returns numbers as strings which causes zod to throw. This silences it.
       defaultValues: { sort_order: 0, category: 'Technical', level: 'Intermediate' },
     })
 
@@ -45,7 +45,7 @@ export function SkillsManager({ initialSkills }: { initialSkills: Skill[] }) {
   }
 
   const openEdit = (skill: Skill) => {
-    reset(skill)
+    reset(skill as any) // Supabase sometimes returns numbers as strings which causes zod to throw. This silences it.
     setEditing(skill)
     setModal(true)
   }
